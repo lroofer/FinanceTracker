@@ -55,7 +55,6 @@ namespace FinanceTracker.Application.Services
             var operation = _operationFactory.Create(type, accountId, amount, date, categoryId, description);
             await _operationRepository.AddAsync(operation);
             
-            // Update account balance
             var account = await _accountRepository.GetByIdAsync(accountId);
             if (account == null)
                 throw new InvalidOperationException($"Account with ID {accountId} not found");
@@ -84,7 +83,6 @@ namespace FinanceTracker.Application.Services
             operation.UpdateAmount(newAmount);
             await _operationRepository.UpdateAsync(operation);
             
-            // Update account balance
             var account = await _accountRepository.GetByIdAsync(operation.BankAccountId);
             if (account == null)
                 throw new InvalidOperationException($"Account with ID {operation.BankAccountId} not found");
@@ -116,7 +114,6 @@ namespace FinanceTracker.Application.Services
             if (operation == null)
                 throw new InvalidOperationException($"Operation with ID {id} not found");
             
-            // Update account balance
             var account = await _accountRepository.GetByIdAsync(operation.BankAccountId);
             if (account == null)
                 throw new InvalidOperationException($"Account with ID {operation.BankAccountId} not found");

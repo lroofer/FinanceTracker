@@ -25,7 +25,6 @@ namespace FinanceTracker.Application.Facades
             _analyticsService = analyticsService;
         }
 
-        // Account methods
         public async Task<IEnumerable<BankAccount>> GetAllAccountsAsync()
         {
             return await _accountService.GetAllAccountsAsync();
@@ -41,7 +40,6 @@ namespace FinanceTracker.Application.Facades
             await _accountService.RecalculateBalanceAsync(accountId);
         }
 
-        // Category methods
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
             return await _categoryService.GetAllCategoriesAsync();
@@ -52,7 +50,6 @@ namespace FinanceTracker.Application.Facades
             return await _categoryService.CreateCategoryAsync(type, name);
         }
 
-        // Operation methods
         public async Task<IEnumerable<Operation>> GetAllOperationsAsync()
         {
             return await _operationService.GetAllOperationsAsync();
@@ -72,7 +69,6 @@ namespace FinanceTracker.Application.Facades
                 OperationType.Expense, accountId, amount, date, categoryId, description);
         }
 
-        // Analytics methods
         public async Task<decimal> GetBalanceForPeriodAsync(DateTime start, DateTime end)
         {
             return await _analyticsService.CalculateBalanceForPeriodAsync(start, end);

@@ -21,7 +21,6 @@ namespace FinanceTracker.Application.Import
             _operationService = operationService;
         }
 
-        // Template Method
         public async Task ImportDataAsync(string filePath)
         {
             var data = await ReadDataFromFileAsync(filePath);
@@ -30,10 +29,8 @@ namespace FinanceTracker.Application.Import
             await ImportOperationsAsync(data.Operations);
         }
 
-        // Abstract method to be implemented by subclasses
         protected abstract Task<ImportData> ReadDataFromFileAsync(string filePath);
 
-        // Common methods for all implementations
         protected virtual async Task ImportAccountsAsync(IEnumerable<BankAccountDto> accounts)
         {
             foreach (var accountDto in accounts)
@@ -65,7 +62,6 @@ namespace FinanceTracker.Application.Import
         }
     }
 
-    // DTOs for data import
     public class ImportData
     {
         public IEnumerable<BankAccountDto> Accounts { get; set; } = new List<BankAccountDto>();

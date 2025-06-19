@@ -23,26 +23,21 @@ namespace FinanceTracker.ConsoleApp
 
         private static void SetupDependencies()
         {
-            // Setup repositories
             var accountRepository = new InMemoryBankAccountRepository();
             var categoryRepository = new InMemoryCategoryRepository();
             var operationRepository = new InMemoryOperationRepository();
 
-            // Setup factories
             var accountFactory = new BankAccountFactory();
             var categoryFactory = new CategoryFactory();
             var operationFactory = new OperationFactory();
 
-            // Setup services
             var accountService = new BankAccountService(accountRepository, operationRepository, accountFactory);
             var categoryService = new CategoryService(categoryRepository, categoryFactory);
             var operationService = new OperationService(operationRepository, accountRepository, operationFactory);
             var analyticsService = new AnalyticsService(operationRepository, categoryRepository);
 
-            // Setup facade
             _financeManager = new FinanceManagerFacade(accountService, categoryService, operationService, analyticsService);
 
-            // Setup logging
             _performanceLogger = new ConsolePerformanceLogger();
         }
 
